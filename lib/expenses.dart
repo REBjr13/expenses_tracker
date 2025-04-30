@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class ExpensesTrack extends StatefulWidget {
@@ -11,19 +10,9 @@ class ExpensesTrack extends StatefulWidget {
 class _ExpensesTrackState extends State<ExpensesTrack> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: MaterialApp(
-        
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Expenses Tracker'),
-          ),
-          body: const Center(
-            child: Text('Hello World!'),
-          ),
-        ),
-      ),
+    return Scaffold(
+      appBar: AppBar(title: const Text('Expenses Tracker')),
+      body: const Center(child: Text('Hello World!')),
     );
   }
 }

@@ -2,5 +2,8 @@ import 'package:expenses_tracker/expenses.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(ExpensesTrack());
+  runApp(MaterialApp(
+
+    home: const ExpensesTrack(),
+  ));
 }
