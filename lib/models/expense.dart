@@ -21,8 +21,7 @@ class Expense {
     required this.title,
     required this.amount,
     required this.date,
-    required this.id,
     required this.category,
-  });
+  })
     : id = uuid.v4(); //to generate unique id
 }
