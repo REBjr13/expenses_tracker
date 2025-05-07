@@ -11,11 +11,14 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Expenses Tracker', textAlign: TextAlign.right,), backgroundColor: Colors.indigo, elevation: 40,),
-      body: Column(
-        children: [
-           Center(child: Text('Hello World!')),
-        ],
+      appBar: AppBar(
+        title: const Text('Expenses Tracker', textAlign: TextAlign.right),
+        backgroundColor: Colors.indigo,
+        elevation: 40,
+      ),
+      body: Column(children: [Center(child: Text('Hello World!')
+      )
+      ]
       ),
     );
   }
