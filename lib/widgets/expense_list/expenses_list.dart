@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:expenses_tracker/models/expense.dart';
+import 'package:expenses_tracker/widgets/expense_list/expense_item.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesList extends StatelessWidget {
@@ -11,7 +12,7 @@ class ExpensesList extends StatelessWidget {
     return ListView.builder(
       //use listView if you do not know the amount of data in a list(automatically scrollable) items are created only when needed
       itemCount: expenses.length,
-      itemBuilder: (context, index) => Text(expenses[index].title),
+      itemBuilder: (context, index) => ExpenseItem(expenses[index]),
     );
   }
 }
