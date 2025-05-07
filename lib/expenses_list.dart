@@ -11,6 +11,7 @@ class ExpensesList extends StatelessWidget {
   final List<Expense> expenses;
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ListView.builder(itemBuilder: (context, index)
+    => Text(),);//use listView if you do not know the amount of data in a list(automatically scrollable)
   }
 }
