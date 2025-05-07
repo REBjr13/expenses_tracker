@@ -1,3 +1,4 @@
+import 'package:expenses_tracker/widgets/expenses_list.dart';
 import 'package:expenses_tracker/models/expense.dart';
 import 'package:flutter/material.dart';
 
@@ -19,25 +20,25 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
     Expense(
       title: "Taxi Ride",
       amount: 1500,
-      date: DateTime.now().subtract(Duration(days: 1)),
+      date: DateTime.now(),
       category: Category.work,
     ),
     Expense(
       title: "Movie Ticket",
       amount: 1200,
-      date: DateTime.now().subtract(Duration(days: 2)),
+      date: DateTime.now(),
       category: Category.leisure,
     ),
     Expense(
       title: "Groceries",
       amount: 3000,
-      date: DateTime.now().subtract(Duration(days: 3)),
+      date: DateTime.now(),
       category: Category.food,
     ),
     Expense(
       title: "Gym Membership",
       amount: 2500,
-      date: DateTime.now().subtract(Duration(days: 4)),
+      date: DateTime.now(),
       category: Category.leisure,
     ),
   ];
@@ -45,12 +46,12 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Expenses Tracker', textAlign: TextAlign.right),
-        backgroundColor: Colors.indigo,
-        elevation: 40,
+      body: Column(
+        children: [
+          Text('Hello World!'),
+          Expanded(child: ExpensesList(expenses: _registeredExpenses)),
+        ],
       ),
-      body: Column(children: [Center(child: Text('Hello World!'))]),
     );
   }
 }
