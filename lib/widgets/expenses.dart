@@ -46,6 +46,10 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Expenses Tracker"),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add),),],
+      ),
       body: Column(
         children: [
           Text('Hello World!'),
