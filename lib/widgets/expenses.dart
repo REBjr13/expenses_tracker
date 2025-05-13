@@ -68,7 +68,6 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
       ),
       body: Column(
         children: [
-          Text('Hello World!'),
           Expanded(child: ExpensesList(expenses: _registeredExpenses)),
         ],
       ),

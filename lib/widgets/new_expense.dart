@@ -36,10 +36,12 @@ class _NewExpenseState extends State<NewExpense> {
           ),
           SizedBox(),
           TextField(
-            controller: _amountControl,
-            maxLength: 7,
+            controller: _amountControl, //for the amount
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(label: Text("Amount")),
+            decoration: InputDecoration(
+              label: Text("Amount"),
+              prefixText: '\$ ',
+            ),
           ),
           Row(
             children: [
@@ -51,7 +53,12 @@ class _NewExpenseState extends State<NewExpense> {
                 child: Text("Save Expense"),
               ),
               SizedBox(width: 10),
-              TextButton(onPressed: () {}, child: Text('Close')),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Close'),
+              ),
             ],
           ),
         ],
