@@ -8,6 +8,11 @@ class NewExpense extends StatefulWidget {
 }
 
 class _NewExpenseState extends State<NewExpense> {
+  var _enterTitle = '';
+  void _saveTitleInput(String inputValue) {
+    _enterTitle = inputValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,8 +21,19 @@ class _NewExpenseState extends State<NewExpense> {
         children: [
           TextField(
             //TExt input element
+            onChanged: _saveTitleInput,
             maxLength: 50,
-            decoration: InputDecoration(label: Text("Title"),),
+            decoration: InputDecoration(label: Text("Title")),
+          ),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  print(_enterTitle);
+                },
+                child: Text("Save Expense"),
+              ),
+            ],
           ),
         ],
       ),
