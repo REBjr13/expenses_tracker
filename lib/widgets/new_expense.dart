@@ -36,27 +36,26 @@ class _NewExpenseState extends State<NewExpense> {
   void _submitForm() {
     final enteredAmount = double.tryParse(
       _amountControl.text,
-    ); //tryParse yields a double if given one and null if given  string
+    ); // tryParse yields a double if given one and null if given string
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
     if (_titleControl.text.trim().isEmpty ||
         amountIsInvalid ||
-        _selectedDate == null) //checks for empty spaces
+        _selectedDate == null) // checks for empty spaces
     {
       showDialog(
         context: context,
-        builder:
-            (ctx) => AlertDialog(
-              title: Text('Invalid input'),
-              content: Text("put valid data"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('OK'),
-                ),
-              ],
+        builder: (ctx) => AlertDialog(
+          title: Text('Invalid input'),
+          content: Text("put valid data"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('OK'),
             ),
+          ],
+        ),
       );
       return;
     }
@@ -64,7 +63,7 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   void dispose() {
-    _titleControl.dispose(); //always dispose texteditingcontrollers
+    _titleControl.dispose(); // always dispose texteditingcontrollers
     _amountControl.dispose();
     super.dispose();
   }
@@ -76,18 +75,17 @@ class _NewExpenseState extends State<NewExpense> {
       child: Column(
         children: [
           TextField(
-            //TExt input element
+            // TExt input element
             controller: _titleControl,
             maxLength: 50,
             decoration: InputDecoration(label: Text("Title")),
           ),
           SizedBox(),
-
           Row(
             children: [
               Expanded(
                 child: TextField(
-                  controller: _amountControl, //for the amount
+                  controller: _amountControl, // for the amount
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     label: Text("Amount"),
@@ -120,22 +118,21 @@ class _NewExpenseState extends State<NewExpense> {
             children: [
               DropdownButton(
                 value: _selectedCategory,
-                items:
-                    Category.values
-                        .map(
-                          (category) => DropdownMenuItem(
-                            value: category,
-                            child: Text(category.name.toUpperCase()),
-                          ),
-                        )
-                        .toList(),
+                items: Category.values
+                    .map(
+                      (category) => DropdownMenuItem(
+                        value: category,
+                        child: Text(category.name.toUpperCase()),
+                      ),
+                    )
+                    .toList(),
                 onChanged: (value) {
                   if (value == null) {
                     return;
                   }
                   setState(() {
                     _selectedCategory =
-                        value; //updates the dropdown currrent item
+                        value; // updates the dropdown current item
                   });
                 },
               ),

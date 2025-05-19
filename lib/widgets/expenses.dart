@@ -47,9 +47,7 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
   void _openAddExpenseScreen() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) {
-        return NewExpense();
-      },
+      builder: (ctx) => const NewExpense(),
     );
   }
 
@@ -57,18 +55,20 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Expenses Tracker"),
-        actionsPadding: EdgeInsets.only(right: 45),
+        title: const Text("Expenses Tracker"),
+        actionsPadding: const EdgeInsets.only(right: 45),
         actions: [
           IconButton(
             onPressed: _openAddExpenseScreen,
-            icon: Icon(Icons.play_arrow_outlined),
+            icon: const Icon(Icons.play_arrow_outlined),
           ),
         ],
       ),
       body: Column(
         children: [
-          Expanded(child: ExpensesList(expenses: _registeredExpenses)),
+          Expanded(
+            child: ExpensesList(expenses: _registeredExpenses),
+          ),
         ],
       ),
     );
