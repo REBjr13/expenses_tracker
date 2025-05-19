@@ -1,8 +1,12 @@
-import 'package:expenses_tracker/models/expense.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import 'package:expenses_tracker/models/expense.dart';
+
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+  const NewExpense({super.key, required this.onAddExpense});
+
+  final void Function(Expense expense) onAddExpense;
 
   @override
   State<NewExpense> createState() => _NewExpenseState();
@@ -44,21 +48,30 @@ class _NewExpenseState extends State<NewExpense> {
     {
       showDialog(
         context: context,
-        builder: (ctx) => AlertDialog(
-          title: Text('Invalid input'),
-          content: Text("put valid data"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('OK'),
+        builder:
+            (ctx) => AlertDialog(
+              title: Text('Invalid input'),
+              content: Text("put valid data"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('OK'),
+                ),
+              ],
             ),
-          ],
-        ),
       );
       return;
     }
+    widget.onAddExpense(
+      Expense(
+        title: _titleControl.text,
+        amount: enteredAmount,
+        date: _selectedDate!,
+        category: _selectedCategory,
+      ),
+    );
   }
 
   @override
@@ -118,14 +131,15 @@ class _NewExpenseState extends State<NewExpense> {
             children: [
               DropdownButton(
                 value: _selectedCategory,
-                items: Category.values
-                    .map(
-                      (category) => DropdownMenuItem(
-                        value: category,
-                        child: Text(category.name.toUpperCase()),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    Category.values
+                        .map(
+                          (category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(category.name.toUpperCase()),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (value) {
                   if (value == null) {
                     return;

@@ -47,8 +47,16 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
   void _openAddExpenseScreen() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const NewExpense(),
+      builder: (ctx) =>  NewExpense(onAddExpense: _addExpense,),
     );
+  }
+
+  void _addExpense(Expense expense) {
+
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
+    
   }
 
   @override
@@ -66,9 +74,7 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: ExpensesList(expenses: _registeredExpenses),
-          ),
+          Expanded(child: ExpensesList(expenses: _registeredExpenses)),
         ],
       ),
     );
