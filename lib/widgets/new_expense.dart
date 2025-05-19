@@ -41,7 +41,25 @@ class _NewExpenseState extends State<NewExpense> {
     if (_titleControl.text.trim().isEmpty ||
         amountIsInvalid ||
         _selectedDate == null) //checks for empty spaces
-    {}
+    {
+      showDialog(
+        context: context,
+        builder:
+            (ctx) => AlertDialog(
+              title: Text('Invalid input'),
+              content: Text("put valid data"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            ),
+      );
+      return;
+    }
   }
 
   @override
