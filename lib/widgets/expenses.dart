@@ -24,39 +24,26 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
       date: DateTime.now(),
       category: Category.work,
     ),
-    Expense(
-      title: "Movie Ticket",
-      amount: 1200,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-    Expense(
-      title: "Groceries",
-      amount: 3000,
-      date: DateTime.now(),
-      category: Category.food,
-    ),
-    Expense(
-      title: "Gym Membership",
-      amount: 2500,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
   ];
 
   void _openAddExpenseScreen() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
-      builder: (ctx) =>  NewExpense(onAddExpense: _addExpense,),
+      builder: (ctx) => NewExpense(onAddExpense: _addExpense),
     );
   }
 
   void _addExpense(Expense expense) {
-
     setState(() {
       _registeredExpenses.add(expense);
     });
-    
+  }
+
+  void _removeExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.remove(expense);//removes expense visually and internally
+    });
   }
 
   @override
@@ -74,7 +61,7 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
       ),
       body: Column(
         children: [
-          Expanded(child: ExpensesList(expenses: _registeredExpenses)),
+          Expanded(child: ExpensesList(expenses: _registeredExpenses, onRemovedExpense: _removeExpense,)),
         ],
       ),
     );

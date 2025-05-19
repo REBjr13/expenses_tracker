@@ -25,7 +25,7 @@ class _NewExpenseState extends State<NewExpense> {
 
   void _presentDatePicker() async {
     final now = DateTime.now();
-    final firstDate = DateTime(now.year - 1, now.month - 1, now.day);
+    final firstDate = DateTime(now.year - 2, now.month - 1, now.day );
     final pickedDate = await showDatePicker(
       context: context,
       initialDate: now,
@@ -72,6 +72,7 @@ class _NewExpenseState extends State<NewExpense> {
         category: _selectedCategory,
       ),
     );
+    Navigator.pop(context);
   }
 
   @override
@@ -84,7 +85,7 @@ class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.fromLTRB(16,48,16,16),
       child: Column(
         children: [
           TextField(
