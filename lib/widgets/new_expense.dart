@@ -33,6 +33,17 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
+  void _submitForm() {
+    final enteredAmount = double.tryParse(
+      _amountControl.text,
+    ); //tryParse yields a double if given one and null if given  string
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+    if (_titleControl.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDate == null) //checks for empty spaces
+    {}
+  }
+
   @override
   void dispose() {
     _titleControl.dispose(); //always dispose texteditingcontrollers
@@ -86,7 +97,7 @@ class _NewExpenseState extends State<NewExpense> {
               ),
             ],
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(height: 20),
           Row(
             children: [
               DropdownButton(
@@ -112,11 +123,7 @@ class _NewExpenseState extends State<NewExpense> {
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {
-                  debugPrint(_titleControl.text);
-                  debugPrint(_amountControl.text);
-                  print(_selectedDate);
-                },
+                onPressed: _submitForm,
                 child: Text("Save Expense"),
               ),
               SizedBox(width: 10),
