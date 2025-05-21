@@ -41,18 +41,38 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
   }
 
   void _removeExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
     setState(() {
-      _registeredExpenses.remove(expense);//removes expense visually and internally
+      _registeredExpenses.remove(
+        expense,
+      ); //removes expense visually and internally
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 4),
+        action: SnackBarAction(
+          label: "Undo",
+          onPressed: () {
+            setState(() {
+              _registeredExpenses.insert(expenseIndex, expense);
+            });
+          },
+        ),
+        content: Text("Expense deleted"),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = Center(child: Text("NoExpenses, add some now!"));
 
-    Widget mainContent = Center(child: Text("NoExpenses, add some now!"),);
-
-    if(_registeredExpenses.isNotEmpty){
-      mainContent = ExpensesList(expenses: _registeredExpenses, onRemovedExpense: _removeExpense,);
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: _registeredExpenses,
+        onRemovedExpense: _removeExpense,
+      );
     }
     return Scaffold(
       appBar: AppBar(
@@ -65,12 +85,7 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Text("The Chart"),
-          Expanded(child: mainContent ),
-        ],
-      ),
+      body: Column(children: [Text("The Chart"), Expanded(child: mainContent)]),
     );
   }
 }
