@@ -39,3 +39,18 @@ class Expense {
     required this.category,
   }) : id = uuid.v4(); //to generate unique id
 }
+
+class ExpenseBucket {
+  final Category category;
+  final List<Expense> expenses;
+
+  ExpenseBucket({required this.category, required this.expenses});
+
+  double get totalExpenses {
+    double sum = 0; //getter to sum up all expenses
+    for (final expense in expenses) {
+      sum = sum + expense.amount;
+    }
+    return sum;
+  }
+}

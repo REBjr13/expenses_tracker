@@ -54,7 +54,7 @@ void main() {
         ),
       ),
 
-      themeMode: ThemeMode.dark,
+      //themeMode: ThemeMode.dark,
       home: const ExpensesTrack(),
       debugShowCheckedModeBanner: false,
     ),
