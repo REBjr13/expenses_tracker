@@ -1,4 +1,5 @@
 import 'package:expenses_tracker/widgets/expenses.dart';
+import 'package:expenses_tracker/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 
 var kColorScheme = ColorScheme.fromSeed(
@@ -7,15 +8,19 @@ var kColorScheme = ColorScheme.fromSeed(
 
 var kDarkColorScheme = ColorScheme.fromSeed(
   brightness: Brightness.dark, //optimizes from seed for dark mode
-  seedColor: const Color.fromARGB(255, 233, 103, 28),
+  seedColor: const Color.fromARGB(255, 0, 0, 0),
 );
 
 void main() {
   runApp(
     MaterialApp(
+      // darkTheme: Theming().darkTheme,
+      // theme: Theming().theme,
+      // themeMode: ThemeMode.light, //system theme mode
+
       darkTheme: ThemeData.dark().copyWith(
         colorScheme: kDarkColorScheme,
-        
+
         cardTheme: CardTheme().copyWith(
           color: kDarkColorScheme.secondaryContainer,
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -26,7 +31,6 @@ void main() {
             foregroundColor: kDarkColorScheme.onPrimaryContainer,
           ), //sometimes you use styleFrom others copyWith
         ),
-        
 
       ),
       theme: ThemeData().copyWith(
@@ -53,8 +57,6 @@ void main() {
           ),
         ),
       ),
-
-      //themeMode: ThemeMode.dark,
       home: const ExpensesTrack(),
       debugShowCheckedModeBanner: false,
     ),
