@@ -1,5 +1,4 @@
 import 'package:expenses_tracker/widgets/expenses.dart';
-import 'package:expenses_tracker/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 
 var kColorScheme = ColorScheme.fromSeed(
@@ -20,7 +19,6 @@ void main() {
 
       darkTheme: ThemeData.dark().copyWith(
         colorScheme: kDarkColorScheme,
-
         cardTheme: CardTheme().copyWith(
           color: kDarkColorScheme.secondaryContainer,
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),

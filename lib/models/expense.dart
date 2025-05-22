@@ -44,6 +44,12 @@ class ExpenseBucket {
   final Category category;
   final List<Expense> expenses;
 
+  ExpenseBucket.forCategory(List<Expense> allExpenses, this.category)
+    : expenses =
+          allExpenses
+              .where((expense) => expense.category == category)
+              .toList(); //adding additional constructor functions to your class
+
   ExpenseBucket({required this.category, required this.expenses});
 
   double get totalExpenses {
