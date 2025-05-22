@@ -26,7 +26,7 @@ class ExpenseItem extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '\$${expense.amount.toStringAsFixed(2)}', //sets place value to 2//use \ to escape the above
+                  '₦${expense.amount.toStringAsFixed(2)}', //sets place value to 2//use \ to escape the above
                 ),
                 const Spacer(),
                 Row(
