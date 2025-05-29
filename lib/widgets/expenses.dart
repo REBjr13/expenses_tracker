@@ -82,7 +82,7 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Expenses Tracker"),
-        actionsPadding: const EdgeInsets.only(right: 45),
+        actionsPadding: const EdgeInsets.symmetric(horizontal: 10),
         actions: [
           IconButton(
             onPressed: _openAddExpenseScreen,
