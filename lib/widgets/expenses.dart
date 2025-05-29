@@ -28,7 +28,9 @@ class _ExpensesTrackState extends State<ExpensesTrack> {
   ];
 
   void _openAddExpenseScreen() {
+    
     showModalBottomSheet(
+    useSafeArea: true,//stays away from notches
       isScrollControlled: true,
       context: context,
       builder: (ctx) => NewExpense(onAddExpense: _addExpense),

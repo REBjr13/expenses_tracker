@@ -84,13 +84,15 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
+    
     final keyboardSpace =
         MediaQuery.of(
           context,
         ).viewInsets.bottom; //adds extra pixels when keyboard pops up
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(16, 48, 16, keyboardSpace + 16),
+        
+        padding: EdgeInsets.fromLTRB(16, 16, 16, keyboardSpace + 16),
         child: Column(
           children: [
             TextField(
