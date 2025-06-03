@@ -12,7 +12,7 @@ var kDarkColorScheme = ColorScheme.fromSeed(
 class Theming {
   final darkTheme = ThemeData.dark().copyWith(
     colorScheme: kDarkColorScheme,
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: kDarkColorScheme.secondaryContainer,
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
     ),
@@ -30,7 +30,7 @@ class Theming {
       backgroundColor: kColorScheme.onPrimaryContainer,
       foregroundColor: kColorScheme.primaryContainer,
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: kColorScheme.secondaryContainer,
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
     ),

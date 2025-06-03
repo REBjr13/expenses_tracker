@@ -23,7 +23,7 @@ void main() {
         // themeMode: ThemeMode.light, //system theme mode
         darkTheme: ThemeData.dark().copyWith(
           colorScheme: kDarkColorScheme,
-          cardTheme: CardTheme().copyWith(
+          cardTheme: CardThemeData().copyWith(
             color: kDarkColorScheme.secondaryContainer,
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           ),
@@ -41,7 +41,7 @@ void main() {
                 kColorScheme.onPrimaryContainer, //overrides some aspects
             foregroundColor: kColorScheme.primaryContainer,
           ),
-          cardTheme: CardTheme().copyWith(
+          cardTheme: CardThemeData().copyWith(
             color: kColorScheme.secondaryContainer,
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           ),
