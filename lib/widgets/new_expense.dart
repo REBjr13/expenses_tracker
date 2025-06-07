@@ -1,5 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:expenses_tracker/widgets/dropdown_button.dart';
+import 'package:expenses_tracker/widgets/modal_display/amount_textfield.dart';
+import 'package:expenses_tracker/widgets/modal_display/date_pick.dart';
+import 'package:expenses_tracker/widgets/modal_display/dropdown_button.dart';
+import 'package:expenses_tracker/widgets/modal_display/title_textfield.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expenses_tracker/models/expense.dart';
@@ -26,22 +29,9 @@ class _NewExpenseState extends State<NewExpense> {
   final _titleControl = TextEditingController();
   final _amountControl = TextEditingController();
   DateTime? _selectedDate;
-  Category _selectedCategory = Category.leisure;
+  final Category _selectedCategory = Category.leisure;
 
-  void _presentDatePicker() async {
-    final now = DateTime.now();
-    final firstDate = DateTime(now.year - 2, now.month - 1, now.day);
-    final pickedDate = await showDatePicker(
-      context: context,
-      initialDate: now,
-      firstDate: firstDate,
-      lastDate: now,
-    );
-    setState(() {
-      _selectedDate = pickedDate;
-    });
-  }
-
+  
   void _submitForm() {
     final enteredAmount = double.tryParse(
       _amountControl.text,
@@ -79,12 +69,7 @@ class _NewExpenseState extends State<NewExpense> {
     Navigator.pop(context);
   }
 
-  @override
-  void dispose() {
-    _titleControl.dispose(); // always dispose texteditingcontrollers
-    _amountControl.dispose();
-    super.dispose();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -105,90 +90,28 @@ class _NewExpenseState extends State<NewExpense> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: TextField(
-                          // TExt input element
-                          controller: _titleControl,
-                          maxLength: 50,
-                          decoration: InputDecoration(label: Text("Title")),
-                        ),
-                      ),
+                      TitleTextfield(),
                       SizedBox(width: 10),
-                      Expanded(
-                        child: TextField(
-                          controller: _amountControl, // for the amount
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            label: Text("Amount"),
-                            prefixText: '₦ ',
-                          ),
-                        ),
-                      ),
+                     AmountTextfield()
                     ],
                   )
                 else
-                  TextField(
-                    // TExt input element
-                    controller: _titleControl,
-                    maxLength: 50,
-                    decoration: InputDecoration(label: Text("Title")),
-                  ),
+                 TitleTextfield(),
 
                 if (width >= 600)
                   Row(
                     children: [
                       DropDownButton(),
                       SizedBox(width: 10),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              _selectedDate == null
-                                  ? "No date selected"
-                                  : formatter.format(_selectedDate!),
-                            ),
-                            IconButton(
-                              onPressed: _presentDatePicker,
-                              icon: Icon(Icons.calendar_month),
-                            ),
-                          ],
-                        ),
-                      ),
+                      DatePick(),
                     ],
                   )
                 else
                   Row(
                     children: [
-                      Expanded(
-                        child: TextField(
-                          controller: _amountControl, // for the amount
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            label: Text("Amount"),
-                            prefixText: '₦ ',
-                          ),
-                        ),
-                      ),
+                     AmountTextfield(),
                       const SizedBox(width: 16),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              _selectedDate == null
-                                  ? "No date selected"
-                                  : formatter.format(_selectedDate!),
-                            ),
-                            IconButton(
-                              onPressed: _presentDatePicker,
-                              icon: Icon(Icons.calendar_month),
-                            ),
-                          ],
-                        ),
-                      ),
+                     DatePick(),
                     ],
                   ),
                 const SizedBox(height: 20),
@@ -212,26 +135,7 @@ class _NewExpenseState extends State<NewExpense> {
                 else
                   Row(
                     children: [
-                      DropdownButton(
-                        value: _selectedCategory,
-                        items: Category.values
-                            .map(
-                              (category) => DropdownMenuItem(
-                                value: category,
-                                child: Text(category.name.toUpperCase()),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (value) {
-                          if (value == null) {
-                            return;
-                          }
-                          setState(() {
-                            _selectedCategory =
-                                value; // updates the dropdown current item
-                          });
-                        },
-                      ),
+                      DropDownButton(),
                       const Spacer(),
                       ElevatedButton(
                         onPressed: _submitForm,
