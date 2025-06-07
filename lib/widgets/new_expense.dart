@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:expenses_tracker/widgets/dropdown_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expenses_tracker/models/expense.dart';
@@ -10,6 +11,8 @@ class NewExpense extends StatefulWidget {
 
   @override
   State<NewExpense> createState() => _NewExpenseState();
+
+ 
 }
 
 class _NewExpenseState extends State<NewExpense> {
@@ -17,7 +20,9 @@ class _NewExpenseState extends State<NewExpense> {
   // void _saveTitleInput(String inputValue) {
   //   _enterTitle = inputValue;
   // }
+  
 
+  
   final _titleControl = TextEditingController();
   final _amountControl = TextEditingController();
   DateTime? _selectedDate;
@@ -48,19 +53,18 @@ class _NewExpenseState extends State<NewExpense> {
     {
       showDialog(
         context: context,
-        builder:
-            (ctx) => AlertDialog(
-              title: Text('Invalid input'),
-              content: Text("put valid data"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('OK'),
-                ),
-              ],
+        builder: (ctx) => AlertDialog(
+          title: Text('Invalid input'),
+          content: Text("put valid data"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('OK'),
             ),
+          ],
+        ),
       );
       return;
     }
@@ -84,10 +88,9 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
-    final keyboardSpace =
-        MediaQuery.of(
-          context,
-        ).viewInsets.bottom; //adds extra pixels when keyboard pops up
+    final keyboardSpace = MediaQuery.of(
+      context,
+    ).viewInsets.bottom; //adds extra pixels when keyboard pops up
     return LayoutBuilder(
       builder: (ctx, constraints) {
         final width = constraints.maxWidth;
@@ -96,6 +99,7 @@ class _NewExpenseState extends State<NewExpense> {
           child: Padding(
             padding: EdgeInsets.fromLTRB(16, 16, 16, keyboardSpace + 16),
             child: Column(
+              //TODO: outsource these widgets to different files to reduce bulkyness
               children: [
                 if (width >= 600)
                   Row(
@@ -133,28 +137,7 @@ class _NewExpenseState extends State<NewExpense> {
                 if (width >= 600)
                   Row(
                     children: [
-                      DropdownButton(
-                        value: _selectedCategory,
-                        items:
-                            Category.values
-                                .map(
-                                  (category) => DropdownMenuItem(
-                                    value: category,
-                                    child: Text(category.name.toUpperCase()),
-                                  ),
-                                )
-                                .toList(),
-                        onChanged: (value) {
-                          if (value == null) {
-                            return;
-                          }
-                          setState(() {
-                            _selectedCategory =
-                                value; // updates the dropdown current item
-                          });
-                        },
-                      ),
-
+                      DropDownButton(),
                       SizedBox(width: 10),
                       Expanded(
                         child: Row(
@@ -209,61 +192,60 @@ class _NewExpenseState extends State<NewExpense> {
                     ],
                   ),
                 const SizedBox(height: 20),
-                if(width >= 600)
-                Row(
-                  children: [
+                if (width >= 600)
+                  Row(
+                    children: [
                       const Spacer(),
-                    ElevatedButton(
-                      onPressed: _submitForm,
-                      child: Text("Save Expense"),
-                    ),
-                    SizedBox(width: 10),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text('Close'),
-                    ),
-                  ],
-                )
+                      ElevatedButton(
+                        onPressed: _submitForm,
+                        child: Text("Save Expense"),
+                      ),
+                      SizedBox(width: 10),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('Close'),
+                      ),
+                    ],
+                  )
                 else
-                Row(
-                  children: [
-                    DropdownButton(
-                      value: _selectedCategory,
-                      items:
-                          Category.values
-                              .map(
-                                (category) => DropdownMenuItem(
-                                  value: category,
-                                  child: Text(category.name.toUpperCase()),
-                                ),
-                              )
-                              .toList(),
-                      onChanged: (value) {
-                        if (value == null) {
-                          return;
-                        }
-                        setState(() {
-                          _selectedCategory =
-                              value; // updates the dropdown current item
-                        });
-                      },
-                    ),
-                    const Spacer(),
-                    ElevatedButton(
-                      onPressed: _submitForm,
-                      child: Text("Save Expense"),
-                    ),
-                    SizedBox(width: 10),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text('Close'),
-                    ),
-                  ],
-                ),
+                  Row(
+                    children: [
+                      DropdownButton(
+                        value: _selectedCategory,
+                        items: Category.values
+                            .map(
+                              (category) => DropdownMenuItem(
+                                value: category,
+                                child: Text(category.name.toUpperCase()),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          if (value == null) {
+                            return;
+                          }
+                          setState(() {
+                            _selectedCategory =
+                                value; // updates the dropdown current item
+                          });
+                        },
+                      ),
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: _submitForm,
+                        child: Text("Save Expense"),
+                      ),
+                      SizedBox(width: 10),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('Close'),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
